@@ -1,1 +1,1 @@
-# beanmi
+# [ beanmi](https://beanmi.netlify.app/)
