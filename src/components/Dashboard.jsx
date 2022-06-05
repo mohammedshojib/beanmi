@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/users`, {
+      .get(`https://cryptic-fjord-80366.herokuapp.com/users`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accesToken")}`,
         },
@@ -25,7 +25,7 @@ const Dashboard = () => {
         setData(myUser);
       });
     axios
-      .get(`http://localhost:5000/orders`, {
+      .get(`https://cryptic-fjord-80366.herokuapp.com/orders`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accesToken")}`,
         },

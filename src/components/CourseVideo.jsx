@@ -14,7 +14,7 @@ const CourseVideo = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/users`, {
+      .get(`https://cryptic-fjord-80366.herokuapp.com/users`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accesToken")}`,
         },
