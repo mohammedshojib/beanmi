@@ -72,6 +72,20 @@ body {
   text-decoration: none;
   transition: 0.7s;
 }
+.play-btn {
+  background-color: black;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-white) !important;
+  padding: 5px 10px !important;
+  /* border-radius: 50%; */
+  border: 2px solid var(--bg-black);
+  box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
+  display: inline-block;
+  text-decoration: none;
+  transition: 0.7s;
+}
+
 .btn-extra-header {
   color: var(--text-dark-gray) !important;
   background-color: transparent;

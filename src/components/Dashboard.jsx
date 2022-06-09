@@ -64,8 +64,8 @@ const Dashboard = () => {
             // console.log(od)
             <p key={index}>
               {" "}
-              <b>course name:</b> {od?.orders.name} <b>Paiment:</b>{" "}
-              {od?.orders.pay}
+              <b>course name:</b> {od?.orders?.name} <b>Payment:</b>{" "}
+              {od?.orders?.pay}
             </p>
           ))}
           <img src={err} className="w-25" alt="" />
