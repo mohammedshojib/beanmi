@@ -41,20 +41,24 @@ const CourseVideo = () => {
   const seturl = (url) => {
     setUrl(url);
   };
+  console.log(url);
   return (
     <section id="home" class="banner_wrapper">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-6 header-img-section">
-            <ReactPlayer width="100%" height="300px" controls url={url} />
+            <div className="mt-md-5 mt-0">
+              <ReactPlayer width="100%" height="300px" controls url={url.url} />
+              <p className="mt-2">Name: {url?.name}</p>
+            </div>
           </div>
-          <div class="col-md-6 my-5 my-md-0 text-center text-md-start">
+          <div class="col-md-6 my-5 my-md-0 text-md-start -mt-4">
             <table class="table">
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
-                  <th scope="col">Lentdh</th>
+                  <th scope="col">Time</th>
                   <th scope="col">Play</th>
                 </tr>
               </thead>
@@ -69,7 +73,7 @@ const CourseVideo = () => {
                     <td>
                       <button
                         className="nav-link play-btn"
-                        onClick={() => seturl(video.url)}
+                        onClick={() => seturl(video)}
                       >
                         Play
                       </button>

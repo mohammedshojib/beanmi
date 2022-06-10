@@ -13,6 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CourseVideo from "./components/CourseVideo";
 import Profile from "./components/Profile";
+import Admin from "./components/Admin";
 
 function App() {
   return (
@@ -34,6 +35,14 @@ function App() {
           element={
             <RequireAuth>
               <CourseVideo />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <RequireAuth>
+              <Admin />
             </RequireAuth>
           }
         />
