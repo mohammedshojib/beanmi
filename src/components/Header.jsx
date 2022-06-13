@@ -47,7 +47,7 @@ const Header = () => {
                 ) : (
                   <Link
                     className="nav-link learn-more-btn btn-extra-header"
-                    to="/course-details"
+                    to="/course"
                   >
                     Enroll
                   </Link>

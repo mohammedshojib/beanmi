@@ -21,7 +21,7 @@ const Home = () => {
               <h1 class="banner-title">
                 Start <span>Beanmi</span> to change your life
               </h1>
-              <h4 class="font-weight-bold">৳ 4990</h4>
+              <h4 class="fw-bold">৳ 5500</h4>
               <p class="banner-title-text">
                 Everythink you need to start a online buissness
               </p>

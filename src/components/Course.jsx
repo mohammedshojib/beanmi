@@ -4,6 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import pay from "../assets/pay.svg";
+import { FaCheckSquare } from "react-icons/fa";
 import auth from "../firebase.init";
 
 const Course = () => {
@@ -25,47 +26,101 @@ const Course = () => {
       txid: event.target.txid.value,
       senderNumber: event.target.sendernumber.value,
     };
-    const url = "https://cryptic-fjord-80366.herokuapp.com/orders";
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(order),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        toast.success("Order placed successfully wait 30 min");
-        navigate("/");
+
+    if (
+      event.target.txid.value === "" ||
+      event.target.sendernumber.value === "" ||
+      methode === ""
+    ) {
+      toast.error("Must be fill all details");
+    } else {
+      const url = "https://cryptic-fjord-80366.herokuapp.com/orders";
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(order),
       })
-      .catch((error) => {
-        toast.error(error);
-      });
-    console.log(order);
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          toast.success("Order placed successfully wait 30 min");
+          navigate("/");
+        })
+        .catch((error) => {
+          toast.error(error);
+        });
+    }
   };
 
   return (
     <section id="home" class="banner_wrapper">
       <div class="container">
         <div class="row align-items-center">
-          <div class="col-md-6 mt-5">
-            <img src={pay} class="img-fluid" alt="Banner" />
-          </div>
-          <div class="col-md-6 my-5 my-md-0 text-center text-md-start">
+          <div class="col-md-6 mt-0 mt-md-5">
             <h1 class="banner-title">Payment</h1>
-            <p>
-              বিকাশ নাম্বারঃ 013XXXXXXX (মার্চেন্ট অ্যাকাউন্ট) <br /> পেমেন্ট
-              করার নিয়মঃ *247# ডায়াল করো বা বিকাশ মোবাইল অ্যাপ-এ যাও। পেমেন্ট
-              অপশন সিলেক্ট করো। আমাদের বিকাশ মার্চেন্ট নাম্বারঃ 013XXXXXXX লিখো।
-              টাকার পরিমানঃ 5500 রেফারেন্সঃ তোমার নাম কাউন্টার নাম্বারঃ 1 তোমার
-              পিন নাম্বার দিয়ে পেমেন্ট কমপ্লিট করো যে নাম্বার থেকে বিকাশ করেছ তা
-              এবং ট্রানজেকশন আইডি/TrxID, উপরের ফর্মে ফিলাপ করে দাও। ট্রানজেকশন
-              আইডি/TrxID দেওয়ার সময় অবশ্যই ভাল করে খেয়াল করে, জিরো '0', ইংরেজি ও
-              'o', ইংরেজি বড় হাতে অক্ষর আই 'I' ও ইংরেজি ছোট হাতে অক্ষর এল 'l'
-              দেখে দিবে। সাধারন ভাবে ট্রানজেকশন আইডি/TrxID বড় হাতে অক্ষরে দেওয়া
-              থাকে ।
-            </p>
+            {methode === "bkash" ? (
+              <div>
+                <h4 className="fw-bold">
+                  বিকাশ নাম্বারঃ 01401052260 (পারসোনাল)
+                </h4>
+                <h6 className="fw-bold">পেমেন্ট করার নিয়মঃ</h6>
+                <ul>
+                  <li>*247# ডায়াল করো বা বিকাশ মোবাইল অ্যাপ-এ যাও।</li>
+                  <li>সেন্ড মানি অপশন সিলেক্ট করো।</li>
+                  <li>
+                    টাকার পরিমানঃ <b>5500</b>
+                  </li>
+                  <li>রেফারেন্সঃ তোমার নাম</li>
+                  <li>তোমার পিন নাম্বার দিয়ে পেমেন্ট কমপ্লিট করো</li>
+                  <li>
+                    যে নাম্বার থেকে বিকাশ করেছ তা এবং ট্রানজেকশন আইডি/TrxID,
+                    উপরের ফর্মে ফিলাপ করে দাও।
+                  </li>
+                </ul>
+              </div>
+            ) : methode === "nagad" ? (
+              <div>
+                <h4 className="fw-bold">নগদ নাম্বারঃ 01646052260 (পারসোনাল)</h4>
+                <h6 className="fw-bold">পেমেন্ট করার নিয়মঃ</h6>
+                <ul>
+                  <li>*167# ডায়াল করো বা নগদ মোবাইল অ্যাপ-এ যাও।</li>
+                  <li>সেন্ড মানি অপশন সিলেক্ট করো।</li>
+                  <li>
+                    টাকার পরিমানঃ <b>5500</b>
+                  </li>
+                  <li>রেফারেন্সঃ তোমার নাম</li>
+                  <li>তোমার পিন নাম্বার দিয়ে পেমেন্ট কমপ্লিট করো</li>
+                  <li>
+                    যে নাম্বার থেকে নগদ করেছ তা এবং ট্রানজেকশন আইডি/TrxID, উপরের
+                    ফর্মে ফিলাপ করে দাও।
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <div>
+                <h4 className="fw-bold">
+                  রকেট নাম্বারঃ 01646052260-5 (পারসোনাল)
+                </h4>
+                <h6 className="fw-bold">পেমেন্ট করার নিয়মঃ</h6>
+                <ul>
+                  <li>*322# ডায়াল করো বা রকেট মোবাইল অ্যাপ-এ যাও।</li>
+                  <li>সেন্ড মানি অপশন সিলেক্ট করো।</li>
+                  <li>
+                    টাকার পরিমানঃ <b>5500</b>
+                  </li>
+                  <li>রেফারেন্সঃ তোমার নাম</li>
+                  <li>তোমার পিন নাম্বার দিয়ে পেমেন্ট কমপ্লিট করো</li>
+                  <li>
+                    যে নাম্বার থেকে রকেট করেছ তা এবং ট্রানজেকশন আইডি/TrxID,
+                    উপরের ফর্মে ফিলাপ করে দাও।
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+          <div class="col-md-6 mt-5 mt-md-6  text-start">
             <form>
               <h6 className="fw-bold h5">Select your payment system</h6>
               <input
@@ -125,10 +180,15 @@ const Course = () => {
                   id="exampleInputPassword1"
                 />
               </div>
+              <div className="d-flex justify-content-between border-top mt-3 border-dark">
+                <h4 className="mt-3 fw-bold">Total</h4>
+                <h4 className="mt-3 fw-bold">5500</h4>
+              </div>
               <div class="learn-more-btn-section">
                 <button
                   type="submit"
                   class="nav-link learn-more-btn btn-header"
+                  // disabled={methode == ""}
                 >
                   Enroll
                 </button>
