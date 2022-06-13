@@ -21,6 +21,9 @@
   margin: 0;
   padding: 0;
 }
+a {
+  text-decoration: none;
+}
 :root {
   /* Background Color */
   --bg-black: #090b3c;
@@ -850,4 +853,9 @@ body {
 }
 .card-c {
   margin: 120px;
+}
+.card-b {
+  margin-top: 120px;
+  justify-content: center;
+  text-align: center;
 }

@@ -12,7 +12,7 @@ const CourseVideo = () => {
   const email = user?.email;
   const [data, setData] = useState([]);
   const [url, setUrl] = useState("https://youtu.be/-UVWgDPvZ78");
-  const [videos, setVideos] = useState(["https://youtu.be/-UVWgDPvZ78"]);
+  const [videos, setVideos] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,7 +48,12 @@ const CourseVideo = () => {
         <div class="row align-items-center">
           <div class="col-md-6 header-img-section">
             <div className="mt-md-5 mt-0">
-              <ReactPlayer width="100%" height="300px" controls url={url.url} />
+              <ReactPlayer
+                width="100%"
+                height="300px"
+                controls
+                url={url.url ? url.url : url}
+              />
               <p className="mt-2">Name: {url?.name}</p>
             </div>
           </div>

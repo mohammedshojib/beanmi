@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -9,21 +10,21 @@ const Course = () => {
   const [user, loading, errorHook] = useAuthState(auth);
   const navigate = useNavigate();
   const email = user?.email;
+  const [methode, setMethode] = useState("");
+  const [methodedata, setMethodedata] = useState("");
+
   const handleOrder = (event) => {
     event.preventDefault();
 
     const order = {
-      username: event.target.name.value,
+      methode: methode,
       email: email,
       name: "Buisness",
       pay: "process",
       amount: 4990,
-      methode: event.target.methode.value,
       txid: event.target.txid.value,
-      number: event.target.number.value,
       senderNumber: event.target.sendernumber.value,
     };
-    console.log(order);
     const url = "https://cryptic-fjord-80366.herokuapp.com/orders";
     fetch(url, {
       method: "POST",
@@ -41,6 +42,7 @@ const Course = () => {
       .catch((error) => {
         toast.error(error);
       });
+    console.log(order);
   };
 
   return (
@@ -53,45 +55,57 @@ const Course = () => {
           <div class="col-md-6 my-5 my-md-0 text-center text-md-start">
             <h1 class="banner-title">Payment</h1>
             <p>
-              বিকাশে পেমেন্ট করার পর আপনার নম্বর এবং ট্রানজেকশন আইডি দিয়ে
-              প্যামেন্ট কনফার্ম করুন। Total amount you need to send us at ৳ 4990{" "}
-              <br /> bKash Personal Number : 017XXXXXX
+              বিকাশ নাম্বারঃ 013XXXXXXX (মার্চেন্ট অ্যাকাউন্ট) <br /> পেমেন্ট
+              করার নিয়মঃ *247# ডায়াল করো বা বিকাশ মোবাইল অ্যাপ-এ যাও। পেমেন্ট
+              অপশন সিলেক্ট করো। আমাদের বিকাশ মার্চেন্ট নাম্বারঃ 013XXXXXXX লিখো।
+              টাকার পরিমানঃ 5500 রেফারেন্সঃ তোমার নাম কাউন্টার নাম্বারঃ 1 তোমার
+              পিন নাম্বার দিয়ে পেমেন্ট কমপ্লিট করো যে নাম্বার থেকে বিকাশ করেছ তা
+              এবং ট্রানজেকশন আইডি/TrxID, উপরের ফর্মে ফিলাপ করে দাও। ট্রানজেকশন
+              আইডি/TrxID দেওয়ার সময় অবশ্যই ভাল করে খেয়াল করে, জিরো '0', ইংরেজি ও
+              'o', ইংরেজি বড় হাতে অক্ষর আই 'I' ও ইংরেজি ছোট হাতে অক্ষর এল 'l'
+              দেখে দিবে। সাধারন ভাবে ট্রানজেকশন আইডি/TrxID বড় হাতে অক্ষরে দেওয়া
+              থাকে ।
             </p>
+            <form>
+              <h6 className="fw-bold h5">Select your payment system</h6>
+              <input
+                type="radio"
+                id="bkash"
+                name="fav_language"
+                value="bkash"
+                className="mt-3"
+                onClick={() => setMethode("bkash")}
+              />
+              <label for="bkash" className="ms-1 fw-bold">
+                Bkash
+              </label>
+              <input
+                type="radio"
+                id="nagad"
+                name="fav_language"
+                className="ms-4"
+                value="nagad"
+                onClick={() => setMethode("nagad")}
+              />
+              <label for="nagad" className="ms-1 fw-bold">
+                Nagad
+              </label>
+              <input
+                type="radio"
+                id="rocket"
+                name="fav_language"
+                value="rocket"
+                className="ms-4"
+                onClick={() => setMethode("rocket")}
+              />
+              <label for="rocket" className="ms-1 fw-bold">
+                Rocket
+              </label>
+            </form>
             <form onSubmit={handleOrder}>
               <div class="mb-1">
-                <p for="exampleInputEmail1" class="form-label">
-                  Name
-                </p>
-                <input
-                  type="name"
-                  class="form-control rounded"
-                  id="exampleInputEmail1"
-                  name="name"
-                  aria-describedby="emailHelp"
-                />
-              </div>
-              <div class="mb-1">
-                <label for="exampleInputPassword1" class="form-label">
-                  Phone number
-                </label>
-                <input
-                  type="number"
-                  class="form-control rounded"
-                  name="number"
-                  id="exampleInputPassword1"
-                />
-              </div>{" "}
-              <label for="exampleInputPassword1" class="form-label">
-                Payment Method
-              </label>
-              <select name="methode" className="form-select">
-                <option selected>Bkash</option>
-                <option>Nagad</option>
-                <option>Rocket</option>
-              </select>
-              <div class="mb-1">
-                <label for="exampleInputPassword1" class="form-label">
-                  Sender number
+                <label for="exampleInputPassword1" class="form-label mt-3">
+                  bKash No.
                 </label>
                 <input
                   type="number"
@@ -102,7 +116,7 @@ const Course = () => {
               </div>
               <div class="mb-1">
                 <label for="exampleInputPassword1" class="form-label">
-                  TXID
+                  TrxID
                 </label>
                 <input
                   type="text"

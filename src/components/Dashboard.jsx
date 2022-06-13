@@ -11,9 +11,11 @@ const Dashboard = () => {
   const [user, loading2, errorHook] = useAuthState(auth);
   const email = user?.email;
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`https://cryptic-fjord-80366.herokuapp.com/users`, {
         headers: {
@@ -35,49 +37,64 @@ const Dashboard = () => {
           (user2) => user2?.orders?.email == email
         );
         setOrders(orders);
+        setLoading(false);
       });
   }, []);
 
   return (
     <>
-      {data[0]?.enrolled ? (
-        <div className="card-c">
-          <h1 className="mb-2 text-center">Your Courses</h1>
-          <div class="card" style={{ width: "18rem" }}>
-            <img class="card-img-top mt-2" src={learn} alt="Card image cap" />
-            <div class="card-body">
-              <h5 class="card-title">Buissness</h5>
-              <p class="card-text">Complete Buisness development course</p>
-              <Link
-                to="/course-video"
-                class="nav-link learn-more-btn btn-header"
-              >
-                Watch Video
-              </Link>
-            </div>
+      {loading ? (
+        <div className="card-b">
+          <div class="spinner-border text-center" role="status">
+            <span class="sr-only">Loading...</span>
           </div>
         </div>
       ) : (
-        <div className="card-c text-center">
-          <h1 className="mb-2 ">No Courses Found</h1>
-          {orders.map((od, index) => (
-            // console.log(od)
-            <p key={index}>
-              {" "}
-              <b>course name:</b> {od?.orders?.name} <b>Payment:</b>{" "}
-              {od?.orders?.pay}
-            </p>
-          ))}
-          <img src={err} className="w-25" alt="" />
-          <div class="learn-more-btn-section">
-            <Link
-              class="nav-link learn-more-btn btn-header"
-              to="/course-details"
-            >
-              Enroll
-            </Link>
-          </div>
-        </div>
+        <>
+          {data[0]?.enrolled ? (
+            <div className="card-c">
+              <h1 className="mb-2 text-center">Your Courses</h1>
+              <div class="card" style={{ width: "18rem" }}>
+                <img
+                  class="card-img-top mt-2"
+                  src={learn}
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">Buissness</h5>
+                  <p class="card-text">Complete Buisness development course</p>
+                  <Link
+                    to="/course-video"
+                    class="nav-link learn-more-btn btn-header"
+                  >
+                    Watch Video
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="card-c text-center">
+              <h1 className="mb-2 ">No Courses Purchase</h1>
+              {orders.map((od, index) => (
+                // console.log(od)
+                <p key={index}>
+                  {" "}
+                  <b>course name:</b> {od?.orders?.name} <b>Payment:</b>{" "}
+                  {od?.orders?.pay}
+                </p>
+              ))}
+              <img src={err} className="w-25" alt="" />
+              <div class="learn-more-btn-section">
+                <Link
+                  class="nav-link learn-more-btn btn-header"
+                  to="/course-details"
+                >
+                  Enroll
+                </Link>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </>
   );
