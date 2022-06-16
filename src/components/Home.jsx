@@ -23,7 +23,8 @@ const Home = () => {
               </h1>
               <h4 class="fw-bold">৳ 5500</h4>
               <p class="banner-title-text">
-                Everythink you need to start a online buissness
+                Everythink you need to start a online buissness. Learn to earn
+                money online guaranteed income.
               </p>
               <div class="learn-more-btn-section">
                 <Link class="nav-link learn-more-btn btn-header" to="/course">
@@ -113,7 +114,7 @@ const Home = () => {
               <h2 class="about_title">Learn Something Great</h2>
               <p class="about_text">
                 Beanmi is great learning plateform for building a great
-                lifestyle
+                lifestyle with special support
               </p>
               <div class="my-5">
                 <a class="learn-more-btn" href="#innovate">
@@ -140,7 +141,7 @@ const Home = () => {
                 </h2>
                 <p class="about_text">Live projects in our all courses</p>
                 <div class="mt-5">
-                  <a class="learn-more-btn btn-header" href="#">
+                  <a class="learn-more-btn btn-header" href="#main">
                     Learn more
                   </a>
                 </div>
@@ -384,10 +385,9 @@ const Home = () => {
                     data-bs-parent="#accordionExample"
                   >
                     <div class="accordion-body">
-                      নাহ | কোর্সটি করলেই টাকা ইনকাম করা যাবে তার কোনো
-                      গ্যারান্টি নাই | তবে যদি হার্ডওয়ার্ক কর তাহলেই অবশ্যই
-                      একদিন নিজের অনলাইন বিজনেস / কোনো ভালো মার্কেটিং কোম্পানিতে
-                      জব / freelancer হিসেবে কাজ করতে পারবে |
+                      হ্যাঁ | কোর্সটি করলেই টাকা ইনকাম করা যাবে তবে তোমাকে একটু
+                      হার্ড ওয়ার্ক করতে হবে। লেগে থাকলে ইনকাম এর গ্যারান্টি
+                      আমাদের
                     </div>
                   </div>
                 </div>
